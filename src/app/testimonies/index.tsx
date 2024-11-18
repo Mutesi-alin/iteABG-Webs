@@ -176,7 +176,7 @@ const TeamSection = () => {
       }
     },
     {
-      name: "Kevin Karigirwa",
+      name: "Kevine Karigirwa",
       role: "Sales Executive",
       description: "I'm the chief executive of sales and senior valuable deals that helped Bashana companies in growth.",
       image: "/images/linda.jpeg",
