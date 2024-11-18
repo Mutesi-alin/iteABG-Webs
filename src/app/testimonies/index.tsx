@@ -1,90 +1,120 @@
-'use client';
 
+
+'use client';
 import React from 'react';
 
-interface Testimonial {
-  text: string;
-  author: string;
-  rating: number;
-}
-
-interface StarRatingProps {
-  rating: number;
-}
-
-const TestimonialsSection = () => {
-  const testimonials: Testimonial[] = [
+const TeamSection = () => {
+  const teamMembers = [
     {
-      text: "Choosing this estate services was the best descision I ever made. Their demanstrated exceptional professionalism and expertise. I highly recpmmend their services to anyone.",
-      author: "Louse Hadid",
-      rating: 5,
+      name: "Charlse Ashimwe",
+      role: "Founder",
+      description: "I've established pagepro in 2022 and it was one of the best idea I've had in my life.",
+      image: "/images/Screenshot from 2024-11-17 17-03-25.png",
+      socials: {
+        twitter: "#",
+        instagram: "https://www.instagram.com/bashana_imigongo/p/C23-XxHtOIz/?img_index=1",
+        linkedin: "#"
+      }
     },
     {
-      text: "Choosing this estate services was the best descision I ever made. Their demanstrated exceptional professionalism and expertise. I highly recpmmend their services to anyone.",
-      author: "Louse Hadid",
-      rating: 5,
+      name: "Kevin Karigirwa",
+      role: "Sales Executive",
+      description: "I'm the chief executive of sales and senior valuable deals that helped pagepro in growth.",
+      image: "/images/Screenshot from 2024-11-17 17-03-25.png",
+      socials: {
+        twitter: "#",
+        instagram: "#",
+        linkedin: "#"
+      }
+    },
+    {
+      name: "Harshita Patel",
+      role: "Co-Founder & CEO",
+      description: "I am the co-founder of pagepro and we've pushed our limit so far to make it successful.",
+      image: "/images/Screenshot from 2024-11-17 17-03-25.png",
+      socials: {
+        twitter: "#",
+        instagram: "#",
+        linkedin: "#"
+      }
+    },
+    {
+      name: "Alexa Kimberly",
+      role: "Lead Designer",
+      description: "I've been lead designer for pagepro since the beginning of it and enjoyed every bit.",
+      image: "/images/Screenshot from 2024-11-17 17-03-25.png",
+      socials: {
+        twitter: "#",
+        instagram: "#",
+        linkedin: "#"
+      }
     }
   ];
 
-  const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
+  const SocialIcon = ({ type }: { type: string }) => {
+    const commonClasses = "w-8 h-8 flex items-center justify-center rounded-full bg-amber-500 hover:bg-amber-600 transition-colors duration-300";
+    
     return (
-      <div className="flex gap-1">
-        {[...Array(rating)].map((_, index) => (
-          <svg
-            key={index}
-            className="w-5 h-5 text-orange-400"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      <a href="#" className={commonClasses}>
+        {type === 'twitter' && (
+          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
-        ))}
-      </div>
+        )}
+        {type === 'instagram' && (
+          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        )}
+        {type === 'linkedin' && (
+          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+        )}
+      </a>
     );
   };
 
   return (
-    <div>
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {testimonials.map((testimonial, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-lg p-6 flex flex-col gap-4"
-          >
-            <div className="flex items-center gap-4">
-              <img
-                src="/images/lady.jpg"
-                alt="Profile"
-                className="w-16 h-16 rounded-full object-cover"
-              />
+    <div id="team" className="bg-[#1A202C] text-white py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4 text-amber-500">
+            Meet the brains
+          </h2>
+          <p className="text-gray-400 text-lg">These people work on making our product best.</p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {teamMembers.map((member, index) => (
+            <div key={index} className="flex items-start gap-6 p-6 rounded-lg bg-slate-800/50">
+              <div className="relative">
+                <div className="w-32 h-32 rounded-full overflow-hidden ring-2 ring-amber-500">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              
               <div className="flex-1">
-                <p className="text-gray-600 mb-4">
-                  {testimonial.text}
-                </p>
-                <h3 className="font-bold text-lg text-gray-900">
-                  {testimonial.author}
-                </h3>
-                <StarRating rating={testimonial.rating} />
+                <h3 className="text-2xl font-semibold mb-2 text-white">{member.name}</h3>
+                <p className="text-amber-500 text-sm mb-3 font-medium">{member.role}</p>
+                <p className="text-gray-400 mb-4 leading-relaxed">{member.description}</p>
+                
+                <div className="flex gap-3">
+                  <SocialIcon type="twitter" />
+                  <SocialIcon type="instagram" />
+                  <SocialIcon type="linkedin" />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-    <section className="max-w-6xl mx-auto px-4 py-16 text-center">
-      <div className="space-y-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-blue-900">
-          Contact Us
-        </h2>
-        
-        <p className="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto">
-          Lorem ipsum dolor sit amet consectetur. Ac mi cras luctus lectus adipiscing massa libero. Turpis donec arcu sit et donec egestas massa enim. Platea.
-        </p>
-      </div>
-    </section>
     </div>
   );
 };
 
-export default TestimonialsSection;
+export default TeamSection;

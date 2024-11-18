@@ -1,106 +1,253 @@
-"use client"
-// components/HeroSection.js
-import { useState } from 'react';
+'use client'
+
+import { useState, useEffect, SetStateAction } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 
+const TRANSITION_DURATION = 1000; 
 
 export default function HeroSection() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [direction, setDirection] = useState('next');
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const slides = [
+    {
+      image: '/images/IMG_6823.jpg',
+      title: 'COFFEE FACTORY',
+      description: 'BEHIND EVERY SUCCESSFUL PERSON IS A SUBSTANTIAL AMOUNT OF COFFEE'
+    },
+    {
+      image: '/images/IMG_6831.jpg',
+      title: 'ART GARELLY',
+      description: 'DISCOVER UNIQUE HANDCRAFTED TREASURES'
+    },
+    {
+      image: '/images/IMG_6832.jpg',
+      title: 'COFFEE SHOP',
+      description: 'FIND THE PERFECT GIFT FOR EVERY OCCASION'
+    },
+    {
+      image: '/images/IMG_6833.jpg',
+      title: 'FARMERS SHOP',
+      description: 'FRESH FROM THE FARM TO YOUR TABLE'
+    },
+    {
+      image: '/images/IMG_6835.jpg',
+      title: 'GIFT SHOP',
+      description: 'EXPERIENCE COMFORT AND LUXURY'
+    }
+  ];
+
+  const handleSlideChange = (newDirection: SetStateAction<string>) => {
+    if (isTransitioning) return;
+    
+    setIsTransitioning(true);
+    setDirection(newDirection);
+    
+    setTimeout(() => {
+      if (newDirection === 'next') {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      } else {
+        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+      }
+    }, TRANSITION_DURATION / 2);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, TRANSITION_DURATION);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => handleSlideChange('next'), 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const getSlideStyle = (index: number) => {
+    const isCurrent = index === currentSlide;
+    const isNext = (index === (currentSlide + 1) % slides.length);
+    const isPrev = (index === (currentSlide - 1 + slides.length) % slides.length);
+    
+    let transform = 'scale(0.7) translateZ(-1000px)';
+    let opacity = 0;
+    let zIndex = 0;
+
+    if (isCurrent) {
+      transform = 'scale(1) translateZ(0)';
+      opacity = 1;
+      zIndex = 2;
+    } else if (isNext && direction === 'next') {
+      transform = isTransitioning 
+        ? 'scale(1) translateZ(0)' 
+        : 'scale(0.7) translateZ(-1000px) rotateX(45deg)';
+      zIndex = 1;
+    } else if (isPrev && direction === 'prev') {
+      transform = isTransitioning
+        ? 'scale(1) translateZ(0)'
+        : 'scale(0.7) translateZ(-1000px) rotateX(-45deg)';
+      zIndex = 1;
+    }
+
+    return {
+      opacity,
+      transform,
+      zIndex,
+      transition: `all ${TRANSITION_DURATION}ms cubic-bezier(0.4, 0, 0.2, 1)`
+    };
   };
 
   return (
-    <div className="bg-[#504030] min-h-screen text-white text-2xl ">
-      {/* Navbar */}
-      <nav className="flex justify-between items-center px-8 py-4 relative">
-        <div className="text-2xl font-bold">Logo</div>
-        
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8">
-          <li><a href="#home" className="hover:underline ">Home</a></li>
-          <li><a href="#company" className="hover:underline">Company</a></li>
-          <li><a href="#shop" className="hover:underline">Shop</a></li>
-          <li><a href="#contact" className="hover:underline">Contact</a></li>
-          <li><a href="#gallery" className="hover:underline">Gallery</a></li>
-        </ul>
-
-        {/* Hamburger Icon */}
-        <button 
-          onClick={toggleMenu} 
-          className="md:hidden focus:outline-none text-white"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth="2" 
-              d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
-            />
-          </svg>
-        </button>
-
-        {/* Mobile Menu */}
-        <div className={`absolute top-16 left-0 w-full bg-[#4b2d1f] relative min-h-[600px] text-center transition-all duration-300 ease-in-out ${isMenuOpen ? "block" : "hidden"} md:hidden`}>
-          <ul className="space-y-4 py-4">
-            <li><a href="#home" className="block hover:underline">Home</a></li>
-            <li><a href="#company" className="block hover:underline">Company</a></li>
-            <li><a href="#shop" className="block hover:underline">Shop</a></li>
-            <li><a href="#contact" className="block hover:underline">Contact</a></li>
-            <li><a href="#gallery" className="block hover:underline">Gallery</a></li>
-          </ul>
+    <div id='home' className="min-h-screen">
+      <div className="min-h-screen relative overflow-hidden">
+        <div className="absolute inset-0" style={{ perspective: '2000px' }}>
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className="absolute inset-0 w-full h-full"
+              style={getSlideStyle(index)}
+            >
+          
+              <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url(${slide.image})`,
+                }}
+              />
+              
+            
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.4) 100%)'
+                }}
+              />
+            </div>
+          ))}
         </div>
-
-        {/* Sign-in Button for Desktop */}
-        <button className="hidden md:block bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">Sign in</button>
-      </nav>
-
-      {/* Hero Section */}
-      <div className=" relative min-h-[600px] flex flex-col md:flex-row items-center md:justify-between px-8 md:px-20 py-16 space-y-8 md:space-y-0">
-        {/* Text Section */}
-        <div className="md:w-1/2">
-          <h2 className="text-xl text-orange-300 font-semibold mb-2">Enjoy Your coffee before your activity</h2>
-          <h1 className="text-6xl font-bold mb-4">High Quality Coffee Maker</h1>
-          <p className="text-gray-300 mb-6 text-2xl">
-            Boost your productivity and build your mood with a glass of coffee in the morning. It is the best way to start
-            your day with coffee. Discover the best coffee flavors you will ever have.
-          </p>
-          <button className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">Sign in</button>
-        </div>
-        
-        {/* Image Section */}
-        <div className="md:w-1/2 flex justify-center">
-          <Image src="/images/coffees.png" alt="Coffee cup with beans" width={500} height={500} className=""/>
-        </div>
-      </div>
-      <section className="flex flex-col items-center px-4 py-8 md:py-16 bg-white">
-     
-      <h2 className="text-2xl md:text-4xl font-bold text-blue-900 mb-2">Menu</h2>
 
       
-      <p className="text-gray-500  text-xl mb-6">
-        Awesome site on the top advertising a business online includes assembling.
-       <br/>
-        Having the most well-planned
-      </p>
+        <div className="relative z-10">
+          
+          <nav className="flex justify-between items-center px-8 py-6">
+            <div className="flex items-center">
+              <div className="w-18 h-16 relative">
+                <Image
+                  src="/images/logo.png"
+                  alt="Bashana Companies Logo"
+                  width={88}
+                  height={48}
+                  className="rounded-full"
+                />
+              </div>
+              <div className="flex flex-col ml-2 mt-10">
+                <span className="text-white text-[20px] font-serif">BASHANA</span>
+                <span className="text-white text-[20PX] font-serif">COMPANIES</span>
+              </div>
+            </div>
 
-     
-      <div className="flex space-x-6 text-4xl font-bold">
-        <button className="text-gray-700 text-lg md:text-2xl">Coffee</button>
-        <button className="text-gray-700 text-lg md:text-2xl">Tea</button>
-        <button className="bg-orange-500 text-white px-4 py-2 rounded-md text-lg md:text-xl">
-          Milk
-        </button>
-        <button className="text-gray-700 text-lg md:text-2xl">Nutes</button>
+            
+            <ul className="hidden md:flex space-x-8  text-xl text-gray-200">
+              {['HOME', 'ABOUT', 'PRODUCTS', 'TEAM',  'CONTACT '].map((item) => (
+                <li key={item}>
+                  <a 
+                    href={`#${item.toLowerCase().replace(' ', '-')}`}
+                    className="hover:text-white transition-colors relative group"
+                  >
+                    {item}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex items-center space-x-4">
+              <button onClick={toggleMenu} className="md:hidden text-gray-200 hover:text-white transition-colors">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                </svg>
+              </button>
+            </div>
+          </nav>  
+
+          
+          <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden absolute top-20 left-0 right-0 bg-black bg-opacity-90 z-20`}>
+            <ul className="px-8 py-4 space-y-4 text-gray-200">
+              {['HOME', 'ABOUT', 'PRODUCT', 'TEAM',  'CONTACT'].map((item) => (
+                <li key={item}>
+                  <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="block hover:text-white transition-colors">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          
+          <div className="relative px-8 md:px-20 flex items-center justify-center min-h-[calc(100vh-88px)]">
+            <div className="text-center max-w-2xl relative z-10">
+              <div className="mb-8">
+                <svg className="w-16 h-16 mx-auto animate-spin-slow opacity-80" viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="30" fill="none" stroke="white" strokeWidth="2"/>
+                  <path d="M32 15 C20 28, 44 28, 32 41" stroke="white" fill="none" strokeWidth="2"/>
+                  <circle cx="32" cy="25" r="5" fill="white"/>
+                </svg>
+              </div>
+              
+              <h1 
+                className="text-5xl md:text-7xl font-serif text-white mb-6 transform transition-all duration-1000"
+                style={{
+                  opacity: isTransitioning ? 0 : 1,
+                  transform: isTransitioning ? 'translateY(20px) rotateX(45deg)' : 'translateY(0) rotateX(0)',
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+                }}
+              >
+                {slides[currentSlide].title}
+              </h1>
+              <p 
+                className="text-gray-300 text-lg mb-8 transform transition-all duration-1000 delay-200"
+                style={{
+                  opacity: isTransitioning ? 0 : 1,
+                  transform: isTransitioning ? 'translateY(20px) rotateX(45deg)' : 'translateY(0) rotateX(0)',
+                }}
+              >
+                {slides[currentSlide].description}
+              </p>
+              <button 
+                className="border-2 border-white text-white px-8 py-3 hover:bg-white hover:text-black transition-all duration-300 text-sm tracking-wider relative overflow-hidden group"
+              >
+                <span className="relative z-10">SHOP HERE</span>
+                <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              </button>
+            </div>
+
+          
+
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setDirection(index > currentSlide ? 'next' : 'prev');
+                    setCurrentSlide(index);
+                  }}
+                  className={`group relative h-2 transition-all duration-300 ${
+                    index === currentSlide ? 'w-8' : 'w-2'
+                  }`}
+                >
+                  <span 
+                    className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                      index === currentSlide ? 'bg-white' : 'bg-white/50 group-hover:bg-white/75'
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
     </div>
   );
 }

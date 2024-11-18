@@ -1,57 +1,88 @@
-'use client';
 
+'use client';
 import React from 'react';
 
-const HeroSection = () => {
+const AboutUsSection = () => {
   return (
-    <div>
-    <div className="relative min-h-[600px] flex items-center justify-center ">
-      {/* Background Image Container */}
-      <div className="absolute inset-0 z-0">
+    <div id='about' className="w-full">
+
+      <div className="relative w-full">
+        
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="relative h-[400px] bg-cover bg-center"
           style={{
-            backgroundImage: "url('/images/coffee b.jpg')",
-          }}
+            backgroundImage: "url('/images/backk.png')",          }}
         >
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50"></div>
+          
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg 
+              viewBox="0 0 1920 100" 
+              className="w-full h-[100px] fill-white" 
+              preserveAspectRatio="none"
+            >
+              <path d="M0,0 C300,90 900,80 1920,0 L1920,100 L0,100 Z" />
+            </svg>
+          </div>
+
+          
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+            <h1 className="text-4xl font-bold text-black mb-6">About Us</h1>
+            <p className="text-gray-800 text-lg max-w-3xl text-center px-4">
+              Discover Wanderlust – where every cup is an adventure. We source and roast the finest beans, delivering 
+              extraordinary flavor to your home. And with our partnership with EcoGoji, every bag sold plants a tree. Savor the taste, 
+              embrace the journey, and make a difference—one cuppa at a time.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-white mb-6">
-          Get a chance to have an amazing morning
-        </h1>
-        
-        <p className="text-gray-200 text-xl sm:text-lg lg:text-xl mb-8 max-w-3xl mx-auto">
-          Cursus Quisque Lobortis, Eu Eget Felis, Viverra Scelerisque Lacus In Consectetur Morbi
-          Donec Risus Felis, Quis Elit Lorem. Sit Ex Eget Odio Element
-        </p>
+    
+      <div className="max-w-6xl mx-auto py-20 px-4">
+        <div className="grid md:grid-cols-2 gap-16 items-center">
+          
+          <div className="relative">
+            <div className="rounded-lg overflow-hidden shadow-xl relative">
+              <img
+             src="/images/ground.jpeg"
+alt="Coffee cup with magical tree"
+                className="w-full h-90"
+              />
+              
+              
+              <div className="absolute top-0 -right-8 w-20 h-20">
+                <div className="w-full h-full bg-green-500 rounded-full opacity-20 blur-xl"></div>
+              </div>
+              <div className="absolute -bottom-4 left-10 w-16 h-16">
+                <div className="w-full h-full bg-green-500 rounded-full opacity-20 blur-xl"></div>
+              </div>
+            </div>
+          </div>
 
-        <button 
-          onClick={() => console.log('Order clicked')}
-          className="inline-block px-8 py-3 bg-orange-500 hover:bg-orange-600 
-                     text-white rounded-md text-lg font-medium transition-colors 
-                     duration-200 transform hover:scale-105"
-        >
-          Order now
-        </button>
+        
+          <div className="space-y-6">
+            <div className="uppercase text-black tracking-wider text-sm font-medium">
+              UNIQUE FLAVORS, AROMAS, AND TASTE
+            </div>
+            <h2 className="text-4xl font-bold">
+              Our vision <span className="">Story</span>
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              By focusing on specialty grade, single-origin coffees, we ensure that each cup 
+              is a unique and an extraordinary experience. This allows you to appreciate the 
+              craftsmanship, attention to detail, and rich diversity of the specialty coffee 
+              world. focusing on specialty grade, single-origin coffees, we ensure that each 
+              cup is a unique and an extraordinary experience. This allows you to appreciate 
+              the craftsmanship, attention to detail, and rich diversity of the specialty coffee 
+              world.
+            </p>
+            <button className=" bg-orange-500 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors">
+              Explore Now
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-    <div className="container mx-auto px-4 py-16 text-center">
-      <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
-        Our happy customers
-      </h2>
-      <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-        Awesome site on the top advertising a business online includes assembling
-        <br className="hidden md:block" />
-        Having the most well-planned
-      </p>
-    </div>
     </div>
   );
 };
 
-export default HeroSection;
+export default AboutUsSection;
