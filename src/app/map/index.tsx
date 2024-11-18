@@ -1,16 +1,12 @@
 
-
-
-
-
 'use client';
 import React, { useState } from 'react';
 import { ChevronDown, Coffee, Leaf, Clock, ThumbsUp, Coffee as CoffeeIcon, Package } from 'lucide-react';
 
 const ContactFormFAQ = () => {
-  const [openFAQ, setOpenFAQ] = useState(null);
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
- const faqData = [
+  const faqData = [
     {
       icon: <Coffee className="w-5 h-5" />,
       question: "What coffee brewing methods do you offer?",
@@ -57,7 +53,7 @@ const ContactFormFAQ = () => {
           {faqData.map((item, index) => (
             <div key={index} className="bg-gray-800 rounded-lg overflow-hidden">
               <button
-                onClick={() => setOpenFAQ}
+                onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
                 className="w-full p-4 flex items-center justify-between text-left hover:bg-gray-700 transition-colors duration-300"
               >
                 <div className="flex items-center space-x-4">
@@ -80,7 +76,6 @@ const ContactFormFAQ = () => {
         </div>
       </section>
 
-      
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-gray-800 p-8 rounded-lg">
@@ -88,7 +83,7 @@ const ContactFormFAQ = () => {
               Reach out to us for any inquiry
             </h2>
             
-            <form  className="space-y-4">
+            <form className="space-y-4">
               <div>
                 <input
                   type="text"
@@ -125,7 +120,6 @@ const ContactFormFAQ = () => {
             </form>
           </div>
 
-          {/* Map Section */}
           <div className="h-[300px] md:h-full relative bg-gray-800 rounded-lg overflow-hidden">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7152203640535!2d74.8055!3d34.0836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDA1JzAxLjAiTiA3NMKwNDgnMTkuOCJF!5e0!3m2!1sen!2s!4v1635770000000!5m2!1sen!2s"

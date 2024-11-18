@@ -13,7 +13,7 @@ const DarkFooter = () => {
             <div className="bg-amber-500 p-3 rounded-full mb-3">
               <Phone className="w-5 h-5 text-white" />
             </div>
-            <p>(+250) 786766391</p>
+            <p>(+250) 782073369</p>
           </div>
           
           <div className="flex flex-col items-center">
@@ -82,7 +82,7 @@ const DarkFooter = () => {
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
-            <p className="text-sm mt-2">Get digital marketing updates in your mailbox</p>
+            <p className="text-sm mt-2">Get updates in your mailbox</p>
           </div>
         </div>
 
@@ -90,16 +90,16 @@ const DarkFooter = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm mb-4 md:mb-0">©  2024 Bashana companies  Ltd. All Rights Reserved.</p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-amber-500 transition-colors">
+              <a href="https://www.facebook.com/bashanaimigongoartcenter/?locale=en_GB" className="hover:text-amber-500 transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="hover:text-amber-500 transition-colors">
+              <a href="https://www.linkedin.com/in/charles-ashimwe-378542152/" className="hover:text-amber-500 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="hover:text-amber-500 transition-colors">
+              <a href="https://x.com/imgbashana" className="hover:text-amber-500 transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="hover:text-amber-500 transition-colors">
+              <a href="https://www.instagram.com/bashana_imigongo/" className="hover:text-amber-500 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
