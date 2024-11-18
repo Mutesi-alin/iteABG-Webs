@@ -166,8 +166,8 @@ const TeamSection = () => {
   const teamMembers: TeamMember[] = [
     {
       name: "Charlse Ashimwe",
-      role: "Founder",
-      description: "I've established pagepro in 2022 and it was one of the best idea I've had in my life.",
+      role: "Founder & CEO ",
+      description: "I've established Bashana companies  in 2018 and it was one of the best idea I've had in my life.",
       image: "/images/Screenshot from 2024-11-17 17-03-25.png",
       socials: {
         twitter: "#",
@@ -178,8 +178,8 @@ const TeamSection = () => {
     {
       name: "Kevin Karigirwa",
       role: "Sales Executive",
-      description: "I'm the chief executive of sales and senior valuable deals that helped pagepro in growth.",
-      image: "/images/lady.jpg",
+      description: "I'm the chief executive of sales and senior valuable deals that helped Bashana companies in growth.",
+      image: "/images/linda.jpeg",
       socials: {
         twitter: "#",
         instagram: "#",
@@ -187,10 +187,10 @@ const TeamSection = () => {
       }
     },
     {
-      name: "Harshita Patel",
-      role: "Co-Founder & CEO",
-      description: "I am the co-founder of pagepro and we've pushed our limit so far to make it successful.",
-      image: "/images/Screenshot from 2024-11-17 17-03-25.png",
+      name: "Innocent patel",
+      role: "Advisor",
+      description: "I am the advisor of Bashana companies and we've pushed our limit so far to make it successful.",
+      image: "/images/aman.jpeg",
       socials: {
         twitter: "#",
         instagram: "#",
@@ -198,10 +198,10 @@ const TeamSection = () => {
       }
     },
     {
-      name: "Alexa Kimberly",
+      name: "Umwiza florence",
       role: "Lead Designer",
-      description: "I've been lead designer for pagepro since the beginning of it and enjoyed every bit.",
-      image: "/images/Screenshot from 2024-11-17 17-03-25.png",
+      description: "I've been lead designer for Bashana companies since the beginning of it and enjoyed every bit.",
+      image: "/images/X.jpeg",
       socials: {
         twitter: "#",
         instagram: "#",

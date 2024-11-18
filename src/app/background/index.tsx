@@ -120,7 +120,7 @@ const AboutUsSection = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
             <h1 className="text-4xl font-bold text-black mb-6">About Us</h1>
             <p className="text-gray-800 text-lg max-w-3xl text-center px-4">
-              Discover Wanderlust – where every cup is an adventure. We source and roast the finest beans, delivering 
+              Discover Bashana companies – where every cup is an adventure. We source and roast the finest beans, delivering 
               extraordinary flavor to your home. And with our partnership with EcoGoji, every bag sold plants a tree. Savor the taste, 
               embrace the journey, and make a difference—one cuppa at a time.
             </p>
