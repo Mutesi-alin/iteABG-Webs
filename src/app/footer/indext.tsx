@@ -3,10 +3,7 @@ import React from 'react';
 import { Phone, Mail, MapPin, ArrowRight, Facebook, Linkedin, Twitter, Instagram } from 'lucide-react';
 
 const DarkFooter = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
-  };
 
   return (
     <footer className="bg-gray-900 text-gray-400 py-12">
