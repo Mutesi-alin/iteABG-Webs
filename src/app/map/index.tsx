@@ -1,4 +1,7 @@
 
+
+
+
 'use client';
 import React, { useState } from 'react';
 import { ChevronDown, Coffee, Leaf, Clock, ThumbsUp, Coffee as CoffeeIcon, Package } from 'lucide-react';
@@ -122,7 +125,7 @@ const ContactFormFAQ = () => {
 
           <div className="h-[300px] md:h-full relative bg-gray-800 rounded-lg overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7152203640535!2d74.8055!3d34.0836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDA1JzAxLjAiTiA3NMKwNDgnMTkuOCJF!5e0!3m2!1sen!2s!4v1635770000000!5m2!1sen!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15950.311809955266!2d30.6534!3d-1.9845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19c49c89c735af6d%3A0x39e2c8e0fd741e71!2sKayonza%2C%20Rwanda!5e0!3m2!1sen!2s!4v1635770000000!5m2!1sen!2s"
               className="absolute inset-0 w-full h-full"
               style={{ border: 0 }}
               allowFullScreen

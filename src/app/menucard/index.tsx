@@ -1,5 +1,7 @@
 
 
+
+
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
@@ -13,19 +15,25 @@ interface CoffeeItem {
   description: string;
 }
 
+interface ProductItem {
+  id: number;
+  title: string;
+  imageUrl: string;
+  price: string;
+  description: string;
+}
+
 interface MenuItem {
   id: number;
   title: string;
   imageUrl: string;
   type: string;
-  videoUrl?: string;
-  description?: string;
+  products?: ProductItem[];
 }
 
-interface VideoModalProps {
+interface DetailModalProps {
   title: string;
-  videoUrl: string;
-  description: string;
+  products: ProductItem[];
   onClose: () => void;
 }
 
@@ -47,18 +55,62 @@ const CoffeeDetail: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     },
     {
       id: 3,
-      title: 'Latte',
-      imageUrl: '/images/cup2.jpeg',
+      title: 'Club sandwich',
+      imageUrl: '/images/food3.jpeg',
       price: '$4.00',
       description: 'Smooth latte with artisan foam design'
     },
     {
       id: 4,
-      title: 'Americano',
-      imageUrl: '/images/Iced Americano.jpeg',
+      title: 'Burrito',
+      imageUrl: '/images/food2.jpeg',
       price: '$3.00',
       description: 'Bold americano with smooth finish'
-    }
+    },
+    {
+      id: 4,
+      title: 'Chicken wings',
+      imageUrl: '/images/food1.jpeg',
+      price: '$3.00',
+      description: 'Bold americano with smooth finish'
+    },
+    {
+      id: 4,
+      title: 'Chicken curry',
+      imageUrl: '/images/food5.jpeg',
+      price: '$3.00',
+      description: 'Bold americano with smooth finish'
+    },
+
+    {
+      id: 4,
+      title: 'Blue Mojito',
+      imageUrl: '/images/Blue Mojito.jpeg',
+      price: '$3.00',
+      description: 'Bold americano with smooth finish'
+    },
+    {
+      id: 4,
+      title: 'pina colado',
+      imageUrl: '/images/Home _ Baked Bree.jpeg',
+      price: '$3.00',
+      description: 'Bold americano with smooth finish'
+    },
+    {
+      id: 4,
+      title: 'Tequila Sunrise',
+      imageUrl: '/images/Tequila Sunset.jpeg',
+      price: '$3.00',
+      description: 'Bold americano with smooth finish'
+    },
+    {
+      id: 4,
+      title: 'Tequila Sunrise',
+      imageUrl: '/images/Tequila Sunset.jpeg',
+      price: '$3.00',
+      description: 'Bold americano with smooth finish'
+    },
+    
   ];
 
   return (
@@ -112,31 +164,52 @@ const CoffeeDetail: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   );
 };
 
-const VideoModal: React.FC<VideoModalProps> = ({ title, videoUrl, description, onClose }) => {
+const ProductDetail: React.FC<DetailModalProps> = ({ title, products, onClose }) => {
   return (
-    <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm">
-      <button 
+    <div id='product' className="fixed inset-0 z-50 flex items-center justify-center">
+      <div 
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-300"
         onClick={onClose}
-        className="absolute top-6 right-6 z-50 p-3 rounded-full bg-black/50 text-white hover:bg-black/70 transition-all duration-300"
-      >
-        <X size={24} />
-      </button>
-
-      <div className="h-screen w-screen flex flex-col">
-        <div className="flex-1 relative">
-          <video 
-            className="absolute inset-0 w-full h-full object-contain"
-            controls
-            autoPlay
-            src={videoUrl}
-          >
-            Your browser does not support the video tag.
-          </video>
+      />
+      <div className="relative bg-white rounded-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto m-4 transform transition-all duration-300 ease-in-out">
+        <div className="sticky top-0 bg-white/90 backdrop-blur-sm p-8 border-b z-10">
+          <div className="flex justify-between items-center">
+            <h2 className="text-4xl font-bold">{title}</h2>
+            <button 
+              onClick={onClose}
+              className="text-gray-600 hover:text-gray-800 transition-colors p-3 hover:bg-gray-100 rounded-full"
+            >
+              <X size={24} />
+            </button>
+          </div>
         </div>
-
-        <div className="bg-black/80 backdrop-blur-sm text-white p-8 transform transition-transform duration-300 hover:translate-y-0 translate-y-[calc(100%-5rem)]">
-          <h2 className="text-3xl font-bold mb-3">{title}</h2>
-          <p className="text-gray-300 text-lg">{description}</p>
+        <div className="p-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {products.map((product) => (
+              <div 
+                key={product.id} 
+                className="bg-white rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+              >
+                <div className="aspect-video overflow-hidden relative">
+                  <Image 
+                    src={product.imageUrl} 
+                    alt={product.title}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-semibold mb-2">{product.title}</h3>
+                  <p className="text-gray-600 mb-2">{product.description}</p>
+                  <p className="text-xl font-bold text-orange-500 mb-4">{product.price}</p>
+                  <button className="w-full bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 font-medium">
+                    Order Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -174,50 +247,176 @@ const ItemCard: React.FC<{
 
 const MenuCards: React.FC = () => {
   const [showCoffeeDetail, setShowCoffeeDetail] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState<VideoModalProps | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<DetailModalProps | null>(null);
 
   const items: MenuItem[] = [
     {
       id: 1,
-      title: 'COFFEE',
+      title: 'COFFEE & FOOD',
       imageUrl: '/images/IMG_6867.jpg',
       type: 'coffee'
     },
     {
       id: 2,
       title: 'GIFT SHOP',
-      imageUrl: '/images/IMG_6835.jpg',
+      imageUrl: '/images/PXL_20241119_060624544.jpg',
       type: 'gift',
-      videoUrl: '/images/VID_31891025_064938_480.mp4',
-      description: 'Explore our curated collection of unique gifts and handcrafted items.'
+      products: [
+        {
+          id: 1,
+          title: 'Handmade Pottery',
+          imageUrl: '/images/PXL_20241119_060611154.jpg',
+          price: '$29.99',
+          description: 'Beautiful handcrafted ceramic pottery'
+        },
+        {
+          id: 2,
+          title: 'Local Artwork',
+          imageUrl: '/images/PXL_20241119_060741981.jpg',
+          price: '$49.99',
+          description: 'Original pieces from local artists'
+        },
+        {
+          id: 3,
+          title: 'Local Artwork',
+          imageUrl: '/images/PXL_20241119_060804895.jpg',
+          price: '$49.99',
+          description: 'Original pieces from local artists'
+        },
+        {
+          id: 4,
+          title: 'Local Artwork',
+          imageUrl: '/images/paint9.jpg',
+          price: '$49.99',
+          description: 'Original pieces from local artists'
+          
+        },
+        {
+          id: 5,
+          title: 'Local Artwork',
+          imageUrl: '/images/PXL_20241119_060815597.jpg',
+          price: '$49.99',
+          description: 'Original pieces from local artists'
+        },
+        {
+          id: 6,
+          title: 'Local Artwork',
+          imageUrl: '/images/PXL_20241119_060510463.jpg',
+          price: '$49.99',
+          description: 'Original pieces from local artists'
+        }
+      ]
     },
     {
       id: 3,
       title: 'GUEST HOUSE',
-      imageUrl: '/images/IMG_6864 (1).jpg',
-      type: 'market',
-      videoUrl: '/images/VID_31870319_034147_013 (1).mp4',
-      description: 'Experience comfort and luxury in our carefully designed guest house.'
+      imageUrl: '/images/gusest.jpeg',
+      type: 'guesthouse',
+      products: [
+        {
+          id: 1,
+          title: 'Standard Room',
+          imageUrl: '/images/_ (36).jpeg',
+          price: '$89.99',
+          description: 'Comfortable room with modern amenities'
+        },
+        {
+          id: 2,
+          title: 'Deluxe Suite',
+          imageUrl: '/images/Eco-Friendly Tropical Bedroom.jpeg',
+          price: '$149.99',
+          description: 'Spacious suite with premium features'
+        },
+        {
+          id: 3,
+          title: 'Deluxe Suite',
+          imageUrl: '/images/Eco-Friendly Tropical Bedroom.jpeg',
+          price: '$149.99',
+          description: 'Spacious suite with premium features'
+        },
+        {
+          id: 4,
+          title: 'Deluxe Suite',
+          imageUrl: '/images/Eco-Friendly Tropical Bedroom.jpeg',
+          price: '$149.99',
+          description: 'Spacious suite with premium features'
+        },
+        {
+          id: 5,
+          title: 'Deluxe Suite',
+          imageUrl: '/images/Eco-Friendly Tropical Bedroom.jpeg',
+          price: '$149.99',
+          description: 'Spacious suite with premium features'
+        },
+        {
+          id: 6,
+          title: 'Deluxe Suite',
+          imageUrl: '/images/gusest.jpeg',
+          price: '$149.99',
+          description: 'Spacious suite with premium features'
+        }
+      ]
     },
     {
       id: 4,
       title: 'ART GALLERY',
-      imageUrl: '/images/IMG_6831.jpg',
+      imageUrl: '/images/paint10.jpg',
       type: 'gallery',
-      videoUrl: '/images/VID_31941217_234321_586.mp4',
-      description: 'Immerse yourself in our diverse collection of contemporary and traditional artwork.'
+      products: [
+        {
+          id: 1,
+          title: 'Limited Edition Prints',
+          imageUrl: '/images/paint1.jpg',
+          price: '$199.99',
+          description: 'Exclusive artwork prints from featured artists'
+        },
+        {
+          id: 2,
+          title: 'Original Paintings',
+          imageUrl: '/images/paint2.jpg',
+          price: '$2000',
+          description: 'One-of-a-kind original artworks'
+        },
+        {
+          id: 2,
+          title: 'Original Paintings',
+          imageUrl: '/images/paint10.jpg',
+          price: '$1000',
+          description: 'One-of-a-kind original artworks'
+        },
+        {
+          id: 2,
+          title: 'Original Paintings',
+          imageUrl: '/images/paint5.jpg',
+          price: '$499.99',
+          description: 'One-of-a-kind original artworks'
+        },
+        {
+          id: 2,
+          title: 'Original Paintings',
+          imageUrl: '/images/paint4.jpg',
+          price: '$499.99',
+          description: 'One-of-a-kind original artworks'
+        },
+        {
+          id: 2,
+          title: 'Original Paintings',
+          imageUrl: '/images/paint11.jpg',
+          price: '$499.99',
+          description: 'One-of-a-kind original artworks'
+        }
+      ]
     },
   ];
 
   const handleCardClick = (item: MenuItem) => {
     if (item.type === 'coffee') {
       setShowCoffeeDetail(true);
-    } else {
-      setSelectedVideo({
-        title: item.title || '',
-        videoUrl: item.videoUrl || '',
-        description: item.description || '',
-        onClose: () => setSelectedVideo(null)
+    } else if (item.products) {
+      setSelectedProduct({
+        title: item.title,
+        products: item.products,
+        onClose: () => setSelectedProduct(null)
       });
     }
   };
@@ -243,11 +442,8 @@ const MenuCards: React.FC = () => {
         <CoffeeDetail onClose={() => setShowCoffeeDetail(false)} />
       )}
 
-      {selectedVideo && (
-        <VideoModal 
-          {...selectedVideo}
-          onClose={() => setSelectedVideo(null)}
-        />
+      {selectedProduct && (
+        <ProductDetail {...selectedProduct} />
       )}
     </div>
   );
