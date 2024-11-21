@@ -24,28 +24,28 @@ const TeamSection = () => {
       role: "Chairman",
       image: "/images/m.png",
       size: 'large',
-      bio: "Michael Sudarkasa is a visionary leader with over two decades of experience in strategic business development and African entrepreneurship. He has been instrumental in driving economic growth and innovation across multiple sectors.",
+      bio: "Professional Capacity and Areas of Specialty: Michael Sudarkasa is the Chief Executive Officer of Africa Business Group. A commercial attorney (intellectual property, broadcast media, and cross border transactions) and economic development practitioner, his areas of specialty include African private sector development, international trade and investment promotion and facilitation, corporate finance and private equity investment.",
       linkedin: "https://linkedin.com/in/michaelsudarkasa"
     },
     {
       name: "Mignonne Karugu",
       role: "Chief Executive Officer",
       image: "/images/k.png",
-      bio: "Mignonne Karugu brings transformative leadership to African Business Group, with expertise in strategic planning, corporate governance, and sustainable business practices.",
+      bio: "Professional Capacity and Areas of Specialty: Mignonne is the CEO of Africa Business Group (ABG), a South Africa based continentally active, African economic development company, and the Managing Director of the company’s branch in Rwanda. In addition to planning the company’s strategy and directing the internal operations of ABG, Mignonne leads the firms work related to the facilitation of international trade and investment programmes by driving the firm’s business development efforts in the continent in the areas of agriculture, off-grid renewable energy, healthcare, and capacity building.",
       linkedin: "https://linkedin.com/in/mignonnekarugu"
     },
     {
       name: "Dr Richard Hayes",
       role: "Senior Advisor & Entrepreneur Development",
       image: "/images/d.png",
-      bio: "Dr. Richard Hayes is a renowned expert in entrepreneurial ecosystems, providing critical insights and mentorship to emerging businesses across the African continent.",
+      bio: "Professional Capacity and Areas of Specialty: Dr. Richard Hayes serves as a Senior Advisor, Entrepreneurship Development for the Africa Business Group. He also is an Associate Professor of Management and Entrepreneurship at the Frank Zarb School of Business at Hofstra University in New York.",
       linkedin: "https://linkedin.com/in/richardhayes"
     },
     {
       name: "Ernest Fausther",
       role: "Manager & Senior Advisor",
       image: "/images/h.png",
-      bio: "Ernest Fausther specializes in operational excellence and strategic management, helping organizations optimize their processes and achieve sustainable growth.",
+      bio: "Professional Capacity and Areas of Specialty: Ernest Fauster serves as ABG's Senior Advisor of Multilateral Institutions and provides leadership and significant experience in guiding and facilitating the company's work with institutions within the United Nations, the World Bank Group, the African Development Bank Group among others",
       linkedin: "https://linkedin.com/in/ernestfausther"
     }
   ];

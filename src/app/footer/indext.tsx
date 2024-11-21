@@ -117,12 +117,12 @@ const DarkFooter = () => {
           <div className="max-w-xs">
             <div className="mb-6">
               <h2 className="text-white text-xl mb-1">Your Logo</h2>
-              <p className="text-sm text-gray-400">Your Tagline Here</p>
+              <p className="text-sm text-gray-400">African Business Group</p>
             </div>
             
             <div className="mb-6">
               <h3 className=" text-[#00E5FF] mb-2">About Us</h3>
-              <p className="text-sm">We want to help bring talented students and unique startups together</p>
+              <p className="text-sm">We  specialize in designing promiting,facilitating and implementing , african economic development Projects</p>
             </div>
             
             <div>
@@ -130,11 +130,11 @@ const DarkFooter = () => {
               <div className="space-y-1 text-sm">
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  <span>+91 9999 999 999</span>
+                  <span>+2711 463 7602</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>your.email@.com</span>
+                  <span>info@abghq.com</span>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ const DarkFooter = () => {
             </div>
           </div>
           <p className="text-center text-sm">
-            2023 © Company Ltd. All Rights Reserved
+            2014 © Africa Bussiness Group. All Rights Reserved
           </p>
         </div>
       </div>
