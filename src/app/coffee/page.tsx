@@ -1,257 +1,193 @@
 
+
+
+
 'use client'
 
-import { useState, useEffect, SetStateAction, useCallback } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import { Twitter, Facebook, Linkedin, MapPin, Globe, Zap, Menu, X } from 'lucide-react';
+import { Inter, Montserrat, Roboto_Slab } from 'next/font/google';
 
-const TRANSITION_DURATION = 1000; 
+const inter = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({ subsets: ['latin'] });
+const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 
-export default function HeroSection() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [direction, setDirection] = useState('next');
+const backgroundImages = [
+  '/images/The Smartest Dividend Stock to Buy With $20 Right Now - The Motley Fool.jpeg',
+  '/images/Design of a shopping complex _ Polygonal shape.jpeg',
+  '/images/Flipped learning for talent development_ Lessons from the college classroom.jpeg',
+  '/This Renewable Energy Stock Sees High-Powered Dividend Growth Ahead _ The Motley Fool.jpeg'
+];
 
-  const slides = [
-    {
-      image: '/images/IMG_6823.jpg',
-      title: 'COFFEE FACTORY',
-      description: 'BEHIND EVERY SUCCESSFUL PERSON IS A SUBSTANTIAL AMOUNT OF COFFEE'
-    },
-    {
-      image: '/images/IMG_6831.jpg',
-      title: 'ART GALLERY',
-      description: 'DISCOVER UNIQUE HANDCRAFTED TREASURES'
-    },
-    {
-      image: '/images/IMG_6832.jpg',
-      title: 'COFFEE SHOP',
-      description: 'FIND THE PERFECT GIFT FOR EVERY OCCASION'
-    },
-    {
-      image: '/images/IMG_6833.jpg',
-      title: 'FARMERS SHOP',
-      description: 'FRESH FROM THE FARM TO YOUR TABLE'
-    },
-    {
-      image: '/images/IMG_6835.jpg',
-      title: 'GIFT SHOP',
-      description: 'EXPERIENCE COMFORT AND LUXURY'
-    }
-  ];
+const LandingPage = () => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleSlideChange = useCallback((newDirection: SetStateAction<string>) => {
-    if (isTransitioning) return;
-    
-    setIsTransitioning(true);
-    setDirection(newDirection);
-    
-    setTimeout(() => {
-      if (newDirection === 'next') {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-      } else {
-        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-      }
-    }, TRANSITION_DURATION / 2);
-
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, TRANSITION_DURATION);
-  }, [isTransitioning, slides.length]);
+  const menuItems = ['Home', 'About', 'Team',  'Contacts', 'Projects'];
 
   useEffect(() => {
-    const timer = setInterval(() => handleSlideChange('next'), 6000);
-    return () => clearInterval(timer);
-  }, [handleSlideChange]);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const getSlideStyle = (index: number) => {
-    const isCurrent = index === currentSlide;
-    const isNext = (index === (currentSlide + 1) % slides.length);
-    const isPrev = (index === (currentSlide - 1 + slides.length) % slides.length);
-    
-    let transform = 'scale(0.7) translateZ(-1000px)';
-    let opacity = 0;
-    let zIndex = 0;
-
-    if (isCurrent) {
-      transform = 'scale(1) translateZ(0)';
-      opacity = 1;
-      zIndex = 2;
-    } else if (isNext && direction === 'next') {
-      transform = isTransitioning 
-        ? 'scale(1) translateZ(0)' 
-        : 'scale(0.7) translateZ(-1000px) rotateX(45deg)';
-      zIndex = 1;
-    } else if (isPrev && direction === 'prev') {
-      transform = isTransitioning
-        ? 'scale(1) translateZ(0)'
-        : 'scale(0.7) translateZ(-1000px) rotateX(-45deg)';
-      zIndex = 1;
-    }
-
-    return {
-      opacity,
-      transform,
-      zIndex,
-      transition: `all ${TRANSITION_DURATION}ms cubic-bezier(0.4, 0, 0.2, 1)`
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      setScrollProgress(progress);
     };
+
+    const imageRotationInterval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % backgroundImages.length
+      );
+    }, 5000);
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(imageRotationInterval);
+    };
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <div id='home' className="min-h-screen">
-      <div className="min-h-screen relative overflow-hidden">
-        <div className="absolute inset-0" style={{ perspective: '2000px' }}>
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className="absolute inset-0 w-full h-full"
-              style={getSlideStyle(index)}
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), url(${slide.image})`,
-                }}
-              />
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: 'radial-gradient(circle, transparent 40%, rgba(0,0,0,0.4) 100%)'
-                }}
-              />
-            </div>
-          ))}
+    <div className={`min-h-screen bg-black text-white relative overflow-hidden ${inter.className}`}>
+      {/* Scroll Progress Bar */}
+      <div 
+        className="fixed top-0 left-0 h-1 bg-white/30 z-50 transition-all duration-200" 
+        style={{ width: `${scrollProgress}%` }}
+      />
+
+      {/* Animated Background Image Overlay */}
+      {backgroundImages.map((image, index) => (
+        <div 
+          key={image}
+          className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${
+            index === currentImageIndex 
+              ? 'opacity-100 scale-100 brightness-50 saturate-150' 
+              : 'opacity-0 scale-105 brightness-25 saturate-0'
+          }`}
+        >
+          <img 
+            src={image} 
+            alt={`Background ${index + 1}`} 
+            className="w-full h-full object-cover transition-all duration-[1500ms] transform" 
+            style={{
+              filter: 'grayscale(20%) contrast(120%)',
+              transformOrigin: 'center center'
+            }}
+          />
         </div>
+      ))}
 
-        <div className="relative z-10">
-          <nav className="flex justify-between items-center px-8 py-6">
-            <div className="flex items-center">
-              <div className="w-18 h-16 relative">
-                <Image
-                  src="/images/logo.png"
-                  alt="Bashana Companies Logo"
-                  width={88}
-                  height={48}
-                  className="rounded-full"
-                  priority
-                />
-              </div>
-              <div className="flex flex-col ml-2 mt-10">
-                <span className="text-white text-[20px] font-serif">BASHANA</span>
-                <span className="text-white text-[20PX] font-serif">COMPANIES</span>
-              </div>
-            </div>
-
-            <ul className="hidden md:flex space-x-8 text-xl text-gray-200">
-              {['HOME', 'ABOUT', 'PRODUCTS', 'TEAM', 'CONTACT'].map((item) => (
-                <li key={item}>
-                  <a 
-                    href={`#${item.toLowerCase().replace(' ', '-')}`}
-                    className="hover:text-white transition-colors relative group"
-                  >
-                    {item}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex items-center space-x-4">
-              <button 
-                onClick={toggleMenu} 
-                className="md:hidden text-gray-200 hover:text-white transition-colors"
-                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth="2" 
-                    d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
-                  />
-                </svg>
-              </button>
-            </div>
-          </nav>  
-
-          <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden absolute top-20 left-0 right-0 bg-black bg-opacity-90 z-20`}>
-            <ul className="px-8 py-4 space-y-4 text-gray-200">
-              {['HOME', 'ABOUT', 'PRODUCT', 'TEAM', 'CONTACT'].map((item) => (
-                <li key={item}>
-                  <a 
-                    href={`#${item.toLowerCase().replace(' ', '-')}`} 
-                    className="block hover:text-white transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+      <nav className="sticky top-0 z-40 bg-black/10 backdrop-blur-md ">
+        <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
+          <div className="flex items-center space-x-4">
+            <img 
+              src="/images/log.png" 
+              alt="Logo" 
+              className="h-20 w-20 rounded-full ring-4 ring-white/30 shadow-lg transform transition 
+              hover:rotate-6 hover:scale-110 hover:shadow-2xl object-cover"
+            />
+            <span className={`text-1xl font-bold tracking-wide text-cyan-400 ${montserrat.className}`}>
+              Africa Business Group
+            </span>
           </div>
 
-          <div className="relative px-8 md:px-20 flex items-center justify-center min-h-[calc(100vh-88px)]">
-            <div className="text-center max-w-2xl relative z-10">
-              <div className="mb-8">
-                <svg className="w-16 h-16 mx-auto animate-spin-slow opacity-80" viewBox="0 0 64 64">
-                  <circle cx="32" cy="32" r="30" fill="none" stroke="white" strokeWidth="2"/>
-                  <path d="M32 15 C20 28, 44 28, 32 41" stroke="white" fill="none" strokeWidth="2"/>
-                  <circle cx="32" cy="25" r="5" fill="white"/>
-                </svg>
-              </div>
-              
-              <h1 
-                className="text-5xl md:text-7xl font-serif text-white mb-6 transform transition-all duration-1000"
-                style={{
-                  opacity: isTransitioning ? 0 : 1,
-                  transform: isTransitioning ? 'translateY(20px) rotateX(45deg)' : 'translateY(0) rotateX(0)',
-                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-                }}
+          <div className="hidden md:flex space-x-6 items-center">
+            {menuItems.map((item) => (
+              <a 
+                key={item} 
+                href="#" 
+                className="text-white/70 hover:text-cyan-400 transition-colors uppercase text-xs font-medium tracking-widest"
               >
-                {slides[currentSlide].title}
-              </h1>
-              <p 
-                className="text-gray-300 text-lg mb-8 transform transition-all duration-1000 delay-200"
-                style={{
-                  opacity: isTransitioning ? 0 : 1,
-                  transform: isTransitioning ? 'translateY(20px) rotateX(45deg)' : 'translateY(0) rotateX(0)',
-                }}
-              >
-                {slides[currentSlide].description}
-              </p>
+                {item}
+              </a>
+            ))}
+          </div>
+          <div className="md:hidden">
+            <button 
+              onClick={toggleMobileMenu} 
+              className="text-white hover:text-cyan-400 transition-colors"
+            >
+              {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+            </button>
+          </div>
+        </div>
+
+        {isMobileMenuOpen && (
+          <div className="fixed inset-0 bg-black z-50 md:hidden">
+            <div className="flex flex-col items-center justify-center h-full space-y-6">
+              {menuItems.map((item) => (
+                <a 
+                  key={item} 
+                  href="#" 
+                  onClick={toggleMobileMenu}
+                  className="text-white/70 hover:text-cyan-400 transition-colors uppercase text-xl font-medium tracking-widest"
+                >
+                  {item}
+                </a>
+              ))}
               <button 
-                className="border-2 border-white text-white px-8 py-3 hover:bg-white hover:text-black transition-all duration-300 text-sm tracking-wider relative overflow-hidden group"
+                onClick={toggleMobileMenu} 
+                className="absolute top-6 right-6 text-white hover:text-cyan-400"
               >
-                <span className="relative z-10">SHOP HERE</span>
-                <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                <X size={32} />
               </button>
             </div>
+          </div>
+        )}
+      </nav>
 
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setDirection(index > currentSlide ? 'next' : 'prev');
-                    setCurrentSlide(index);
-                  }}
-                  className={`group relative h-2 transition-all duration-300 ${
-                    index === currentSlide ? 'w-8' : 'w-2'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                >
-                  <span 
-                    className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                      index === currentSlide ? 'bg-white' : 'bg-white/50 group-hover:bg-white/75'
-                    }`}
-                  />
-                </button>
+    
+      <div className="relative z-20 min-h-screen flex items-center justify-center">
+        <div className="relative max-w-4xl mx-auto text-center px-4 z-30">
+          <div className="space-y-8 transform transition-all duration-500 hover:scale-[1.01]">
+            <h1 className={`text-5xl md:text-7xl font-black text-cyan-400 ${robotoSlab.className}`}>
+              Africa Business Group
+            </h1>
+            
+            <p className={`text-xl md:text-2xl text-white/90 max-w-3xl mx-auto italic tracking-wide ${montserrat.className}`}>
+              Expanding Private Sector Participation In Africa's Development Agenda
+            </p>
+
+            <div className="flex justify-center space-x-8 py-6">
+              {[
+                { Icon: MapPin, label: "Strategic Locations" },
+                { Icon: Globe, label: "Global Network" },
+                { Icon: Zap, label: "Fast Growth" }
+              ].map(({ Icon, label }) => (
+                <div key={label} className="flex flex-col items-center space-y-2 text-cyan-400 hover:text-white transition-all group">
+                  <Icon size={40} strokeWidth={1.5} className="group-hover:scale-110" />
+                  <span className="text-xs uppercase tracking-wider">{label}</span>
+                </div>
               ))}
             </div>
+
+            <div className="flex justify-center space-x-10 py-6">
+              {[
+                { Icon: Twitter, color: "hover:text-sky-400" },
+                { Icon: Facebook, color: "hover:text-blue-600" },
+                { Icon: Linkedin, color: "hover:text-blue-800" }
+              ].map(({ Icon, color }) => (
+                <a 
+                  key={color} 
+                  href="#" 
+                  className={`text-white/70 ${color} transition-all duration-300 transform hover:-translate-y-2 hover:scale-125`}
+                >
+                  <Icon size={56} strokeWidth={1.5} />
+                </a>
+              ))}
+            </div>
+
+            <button className="bg-cyan-600 text-white px-12 py-4 rounded-full hover:bg-cyan-700 transition-colors shadow-xl hover:shadow-2xl transform hover:scale-110 text-lg font-bold tracking-wider">
+              Explore More
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default LandingPage;

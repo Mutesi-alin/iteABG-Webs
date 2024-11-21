@@ -4,67 +4,67 @@
 
 'use client';
 import React, { useState } from 'react';
-import { ChevronDown, Coffee, Leaf, Clock, ThumbsUp, Coffee as CoffeeIcon, Package } from 'lucide-react';
+import { ChevronDown, Building2, Globe, Users, Briefcase, LineChart, GraduationCap } from 'lucide-react';
 
 const ContactFormFAQ = () => {
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   const faqData = [
     {
-      icon: <Coffee className="w-5 h-5" />,
-      question: "What coffee brewing methods do you offer?",
-      answer: "We offer various brewing methods including Espresso, Pour Over, French Press, Cold Brew, AeroPress, and Traditional Drip. Each method brings out unique flavors and characteristics of our coffee beans."
+      icon: <Building2 className="w-5 h-5" />,
+      question: "What services does Africa Business Group offer?",
+      answer: "ABG specializes in three key areas: Consulting services for African economic development, Project implementation and management, and Capacity Development programs. We work closely with private sector entities to facilitate sustainable business growth across Africa."
     },
     {
-      icon: <Leaf className="w-5 h-5" />,
-      question: "Are your coffee beans ethically sourced?",
-      answer: "Yes, all our coffee beans are ethically sourced through direct trade partnerships with farmers. We ensure fair wages and sustainable farming practices across our supply chain."
+      icon: <Globe className="w-5 h-5" />,
+      question: "Where does ABG operate?",
+      answer: "Africa Business Group is headquartered in Johannesburg, South Africa, with a strong international presence through our associates in London, New York, Nairobi, Ghana, and Ethiopia. This network allows us to serve clients across Africa and globally."
     },
     {
-      icon: <Clock className="w-5 h-5" />,
-      question: "Do you offer coffee subscriptions?",
-      answer: "Yes, we offer flexible subscription plans delivered weekly, bi-weekly, or monthly. You can customize your coffee selection and adjust delivery frequency anytime."
+      icon: <Users className="w-5 h-5" />,
+      question: "How does ABG support private sector engagement?",
+      answer: "We design and implement tailored strategies to facilitate private sector participation in African economic development. This includes market entry assistance, partnership development, investment facilitation, and strategic advisory services."
     },
     {
-      icon: <ThumbsUp className="w-5 h-5" />,
-      question: "What's your most popular coffee blend?",
-      answer: "Our Signature House Blend is our most popular option, featuring a balanced mix of Brazilian and Colombian beans with notes of chocolate and caramel."
+      icon: <Briefcase className="w-5 h-5" />,
+      question: "What types of projects does ABG handle?",
+      answer: "We manage a diverse portfolio of African economic development projects, focusing on infrastructure development, agriculture, technology, renewable energy, and other key sectors that drive economic growth across the continent."
     },
     {
-      icon: <CoffeeIcon className="w-5 h-5" />,
-      question: "Do you offer decaf options?",
-      answer: "Yes, we offer Swiss Water Process decaf options for most of our popular blends, ensuring great taste without the caffeine."
+      icon: <LineChart className="w-5 h-5" />,
+      question: "What consulting services do you provide?",
+      answer: "Our consulting services include market research and analysis, strategy development, project feasibility studies, investment advisory, and implementation support for businesses looking to expand or establish operations in African markets."
     },
     {
-      icon: <Package className="w-5 h-5" />,
-      question: "How should I store my coffee beans?",
-      answer: "Store your coffee beans in an airtight container in a cool, dark place. Avoid refrigeration as it can introduce moisture. For best results, use within 30 days of roasting."
+      icon: <GraduationCap className="w-5 h-5" />,
+      question: "What are your capacity development programs?",
+      answer: "We offer comprehensive capacity building programs designed to enhance local expertise, including training workshops, skill development programs, and knowledge transfer initiatives tailored to specific industry needs and regional contexts."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
       <section className="max-w-4xl mx-auto px-4 py-16">
-        <h2 className="text-4xl font-bold text-amber-500 text-center mb-4">
+        <h2 className="text-4xl font-bold text-[#00E5FF] text-center mb-4">
           Have any questions?
         </h2>
         <p className="text-gray-400 text-center mb-12">
-          Find answers to our most frequently asked coffee questions
+          Find answers to frequently asked questions about Africa Business Group
         </p>
 
         <div className="space-y-4">
           {faqData.map((item, index) => (
-            <div key={index} className="bg-gray-800 rounded-lg overflow-hidden">
+            <div key={index} className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700">
               <button
                 onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                className="w-full p-4 flex items-center justify-between text-left hover:bg-gray-700 transition-colors duration-300"
+                className="w-full p-4 flex items-center justify-between text-left hover:bg-gray-800 transition-colors duration-300"
               >
                 <div className="flex items-center space-x-4">
-                  <span className="text-amber-500">{item.icon}</span>
+                  <span className="text-[#00E5FF]">{item.icon}</span>
                   <span className="text-gray-300">{item.question}</span>
                 </div>
                 <ChevronDown 
-                  className={`w-5 h-5 text-amber-500 transition-transform duration-300 ${
+                  className={`w-5 h-5 text-[#00E5FF] transition-transform duration-300 ${
                     openFAQ === index ? 'transform rotate-180' : ''
                   }`}
                 />
@@ -81,9 +81,9 @@ const ContactFormFAQ = () => {
 
       <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-gray-800 p-8 rounded-lg">
-            <h2 className="text-2xl md:text-3xl text-amber-500 mb-8 font-medium">
-              Reach out to us for any inquiry
+          <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+            <h2 className="text-2xl md:text-3xl text-[#00E5FF] mb-8 font-medium">
+              Contact Africa Business Group
             </h2>
             
             <form className="space-y-4">
@@ -91,7 +91,7 @@ const ContactFormFAQ = () => {
                 <input
                   type="text"
                   placeholder="Full name"
-                  className="w-full px-4 py-3 rounded-md bg-gray-700 border-transparent focus:border-amber-500 focus:bg-gray-600 focus:ring-1 focus:ring-amber-500 text-gray-300 placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-md bg-gray-700/50 border-gray-600 focus:border-[#00E5FF] focus:bg-gray-700 focus:ring-1 focus:ring-[#00E5FF] text-gray-300 placeholder-gray-400"
                   required
                 />
               </div>
@@ -100,32 +100,32 @@ const ContactFormFAQ = () => {
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="w-full px-4 py-3 rounded-md bg-gray-700 border-transparent focus:border-amber-500 focus:bg-gray-600 focus:ring-1 focus:ring-amber-500 text-gray-300 placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-md bg-gray-700/50 border-gray-600 focus:border-[#00E5FF] focus:bg-gray-700 focus:ring-1 focus:ring-[#00E5FF] text-gray-300 placeholder-gray-400"
                   required
                 />
               </div>
               
               <div>
                 <textarea
-                  placeholder="Messages"
+                  placeholder="Your message"
                   rows={4}
-                  className="w-full px-4 py-3 rounded-md bg-gray-700 border-transparent focus:border-amber-500 focus:bg-gray-600 focus:ring-1 focus:ring-amber-500 text-gray-300 placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-md bg-gray-700/50 border-gray-600 focus:border-[#00E5FF] focus:bg-gray-700 focus:ring-1 focus:ring-[#00E5FF] text-gray-300 placeholder-gray-400"
                   required
                 />
               </div>
               
               <button
                 type="submit"
-                className="w-full px-4 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-md transition-colors duration-300 font-medium"
+                className="w-full px-4 py-3 bg-[#00E5FF] hover:bg-[#00c8e6] text-gray-900 rounded-md transition-colors duration-300 font-medium"
               >
                 Submit
               </button>
             </form>
           </div>
 
-          <div className="h-[300px] md:h-full relative bg-gray-800 rounded-lg overflow-hidden">
+          <div className="h-[300px] md:h-full relative bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15950.311809955266!2d30.6534!3d-1.9845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19c49c89c735af6d%3A0x39e2c8e0fd741e71!2sKayonza%2C%20Rwanda!5e0!3m2!1sen!2s!4v1635770000000!5m2!1sen!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14313.200310830187!2d28.0473!3d-26.2041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950c68f0406a51%3A0x238ac9d9b1d34041!2sJohannesburg%2C%20South%20Africa!5e0!3m2!1sen!2s!4v1635770000000!5m2!1sen!2s"
               className="absolute inset-0 w-full h-full"
               style={{ border: 0 }}
               allowFullScreen
