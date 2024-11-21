@@ -5,6 +5,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Twitter, Facebook, Linkedin, MapPin, Globe, Zap, Menu, X } from 'lucide-react';
 import { Inter, Montserrat, Roboto_Slab } from 'next/font/google';
 
@@ -24,7 +25,7 @@ const LandingPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const menuItems = ['Home', 'About', 'Team',  'Contacts', 'Projects'];
+  const menuItems = ['Home', 'About', 'Team', 'Contacts', 'Projects'];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,9 +69,11 @@ const LandingPage = () => {
               : 'opacity-0 scale-105 brightness-25 saturate-0'
           }`}
         >
-          <img 
+          <Image 
             src={image} 
             alt={`Background ${index + 1}`} 
+            fill
+            priority={index === 0}
             className="w-full h-full object-cover transition-all duration-[1500ms] transform" 
             style={{
               filter: 'grayscale(20%) contrast(120%)',
@@ -83,10 +86,12 @@ const LandingPage = () => {
       <nav className="sticky top-0 z-40 bg-black/10 backdrop-blur-md ">
         <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
           <div className="flex items-center space-x-4">
-            <img 
+            <Image 
               src="/images/log.png" 
               alt="Logo" 
-              className="h-20 w-20 rounded-full ring-4 ring-white/30 shadow-lg transform transition 
+              width={100}
+              height={80}
+              className="rounded-full ring-4 ring-white/30 shadow-lg transform transition 
               hover:rotate-6 hover:scale-110 hover:shadow-2xl object-cover"
             />
             <span className={`text-1xl font-bold tracking-wide text-cyan-400 ${montserrat.className}`}>
@@ -148,7 +153,7 @@ const LandingPage = () => {
             </h1>
             
             <p className={`text-xl md:text-2xl text-white/90 max-w-3xl mx-auto italic tracking-wide ${montserrat.className}`}>
-              Expanding Private Sector Participation In Africa's Development Agenda
+              Expanding Private Sector Participation in Africa&apos;s Development Agenda
             </p>
 
             <div className="flex justify-center space-x-8 py-6">
