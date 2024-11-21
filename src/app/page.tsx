@@ -1,8 +1,8 @@
 
-import HomePage from "./coffee/page";
-import MenuCards from "./menucard";
-import HeroSection from "./background";
-import TestimonialsSection from "./testimonies";
+import HomePage from "./landingpage/page";
+import MenuCards from "./service";
+import HeroSection from "./about";
+import TestimonialsSection from "./team";
 import ContactFormMap from "./map";
 import DarkFooter from "./footer/indext";
 
